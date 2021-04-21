@@ -28,6 +28,10 @@ Features:
 - [ ] Else-statement
 - [ ] For-statement
 - [ ] 64-bit float support
+- [ ] Array support
+- [ ] Char support
+- [ ] String support
+- [ ] Structures support
 
 ## VM
 
