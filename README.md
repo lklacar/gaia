@@ -2,7 +2,9 @@
 
 ## Overview
 
-Gaia is a stack-based VM programming language. 
+Gaia is a simple programming language that compiles to `gaiac` bytecode. 
+
+
 Example program:
 ```
 let i : i64 = 0
