@@ -3,6 +3,16 @@
 ## Overview
 
 Gaia is a stack-based VM programming language. 
+Example program:
+```
+let i : i64 = 0
+let sum : i64 = 0
+while(i < 10) {
+    sum = sum + i
+    i = i + 1
+}
+```
+
 
 Features:
 - [x] 64-bit integer support
