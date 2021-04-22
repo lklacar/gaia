@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,13 +22,15 @@ public class Program {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
-            System.out.println("Usage: gaiac [input].gaia [output].gaiac");
+        if (args.length < 1) {
+            System.out.println("Usage: gaiac [input].gaia");
             return;
         }
 
         var inputFileName = args[0];
-        var outputFileName = args[1];
+
+        var outputFileName = new File(inputFileName).getName();
+        outputFileName = (outputFileName.contains(".") ? outputFileName.substring(0, outputFileName.lastIndexOf('.')) : outputFileName) + ".gaiac";
 
         var charStream = CharStreams.fromFileName(inputFileName);
         var lexer = new GaiaLexer(charStream);
