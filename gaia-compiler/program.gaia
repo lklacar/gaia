@@ -1,6 +1,14 @@
 
-let i : i64 = 5
+func main() {
 
-while(i > 10) {
-    print i
+    if(10 < 5) {
+        let i : i64 = 45
+        print 1
+    }
+
+    print 2
+}
+
+func add() {
+    print 1
 }

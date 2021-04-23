@@ -3,6 +3,7 @@ package com.gaialang.compiler;
 import com.gaialang.compiler.cli.CommandLineOptions;
 import com.gaialang.compiler.generated.GaiaLexer;
 import com.gaialang.compiler.generated.GaiaParser;
+import com.gaialang.compiler.instructions.Instruction;
 import com.gaialang.compiler.listeners.ProgramListener;
 import lombok.SneakyThrows;
 import org.antlr.v4.runtime.CharStreams;
@@ -13,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class GaiaCompiler {
@@ -37,7 +37,13 @@ public class GaiaCompiler {
     }
 
     private void writeOutput() throws IOException {
-        var output = programListener.getCodeBlocks().stream().flatMap(Collection::stream)
+        var instructions = programListener.getInstructions();
+
+        var asm = instructions.stream().map(Instruction::toAsm).collect(Collectors.joining("\n"));
+        System.out.println(asm);
+
+        var output = instructions
+                .stream()
                 .flatMap(instruction -> instruction.toBytecode().stream())
                 .map(this::longToBytes)
                 .collect(Collectors.toList());

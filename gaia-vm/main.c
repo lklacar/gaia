@@ -22,6 +22,7 @@
 #define JMP 14
 #define MOD_i64 15
 #define EQ_i64 16
+#define ALLOC_VARS 17
 
 #define OP(type) (type) (*(++program))
 
@@ -120,7 +121,7 @@ uint64_t run(uint64_t *program) {
                     program = start + op;
                 }
 
-                break;
+                continue;
             }
             case JT: {
                 int64_t op = OP(int64_t);
@@ -129,11 +130,16 @@ uint64_t run(uint64_t *program) {
                     program = start + op;
                 }
 
-                break;
+                continue;
             }
             case JMP: {
                 int64_t op = OP(int64_t);
                 program = start + op;
+
+                continue;
+            }
+            case ALLOC_VARS: {
+                int64_t op = OP(int64_t);
 
                 break;
             }
@@ -179,8 +185,10 @@ uint64_t *load(char *filename) {
                          (uint64_t) (buffer[i + 1]) << 48 |
                          (uint64_t) (buffer[i]) << 56;
 
+        printf("%llu ", value);
         program[k++] = value;
     }
+    printf("\n");
 
     program[k] = END;
     free(buffer);

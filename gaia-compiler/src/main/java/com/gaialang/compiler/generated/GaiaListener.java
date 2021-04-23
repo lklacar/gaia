@@ -28,6 +28,26 @@ public interface GaiaListener extends ParseTreeListener {
 	 */
 	void exitStatement(GaiaParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GaiaParser#functionDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionDefinition(GaiaParser.FunctionDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GaiaParser#functionDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionDefinition(GaiaParser.FunctionDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GaiaParser#functionParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionParameters(GaiaParser.FunctionParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GaiaParser#functionParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionParameters(GaiaParser.FunctionParametersContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GaiaParser#variableDefinitionStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -57,6 +77,16 @@ public interface GaiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(GaiaParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GaiaParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStatement(GaiaParser.ReturnStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GaiaParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStatement(GaiaParser.ReturnStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GaiaParser#whileStatement}.
 	 * @param ctx the parse tree
@@ -204,6 +234,18 @@ public interface GaiaListener extends ParseTreeListener {
 	 */
 	void exitExpressionNumber(GaiaParser.ExpressionNumberContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code expressionFunctionCall}
+	 * labeled alternative in {@link GaiaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionFunctionCall(GaiaParser.ExpressionFunctionCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expressionFunctionCall}
+	 * labeled alternative in {@link GaiaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionFunctionCall(GaiaParser.ExpressionFunctionCallContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code expressionNested}
 	 * labeled alternative in {@link GaiaParser#expression}.
 	 * @param ctx the parse tree
@@ -239,6 +281,26 @@ public interface GaiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionGreaterThan(GaiaParser.ExpressionGreaterThanContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GaiaParser#functionCallExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionCallExpression(GaiaParser.FunctionCallExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GaiaParser#functionCallExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionCallExpression(GaiaParser.FunctionCallExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GaiaParser#functionArguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionArguments(GaiaParser.FunctionArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GaiaParser#functionArguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionArguments(GaiaParser.FunctionArgumentsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code atomInt}
 	 * labeled alternative in {@link GaiaParser#atom}.

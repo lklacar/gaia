@@ -1,10 +1,17 @@
 package com.gaialang.compiler.util;
 
-import com.gaialang.compiler.code.CodeBlock;
+import com.gaialang.compiler.exceptions.GaiaException;
+import com.gaialang.compiler.instructions.Instruction;
+
+import java.util.List;
 
 public class AddressUtil {
-    public static long toBytecodeAddress(CodeBlock currentCodeBlock, int instructionAddress) {
-        return currentCodeBlock.subList(0, instructionAddress)
+    private AddressUtil() {
+        throw new GaiaException();
+    }
+
+    public static long toBytecodeAddress(List<Instruction> instructions, int instructionAddress) {
+        return instructions.subList(0, instructionAddress + 1)
                 .stream().map(instruction -> instruction.toBytecode().size())
                 .reduce(0, Integer::sum);
     }

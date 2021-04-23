@@ -1,6 +1,6 @@
 grammar Gaia;
 
-program: body;
+program: functionDefinition*;
 
 statement
     : variableDefinitionStatement
@@ -10,6 +10,9 @@ statement
     | assignmentStatement
     ;
 
+functionDefinition: 'func' ID LPAREN (functionParameters)* (COMMA functionParameters)*  RPAREN LBRACE body returnStatement? RBRACE;
+
+functionParameters : ID COLON type;
 
 variableDefinitionStatement: 'let' ID COLON type EQ expression;
 
@@ -18,6 +21,8 @@ assignmentStatement: ID EQ expression;
 ifStatement:
     'if' LPAREN expression RPAREN LBRACE ifBody RBRACE
     ;
+
+returnStatement: 'return' atom;
 
 whileStatement :
     'while' LPAREN expression RPAREN LBRACE whileBody RBRACE
@@ -31,7 +36,8 @@ body: (statement | expression)*;
 printStatement: 'print' expression;
 
 expression
-   :  expression op=TIMES  expression         #expressionMul
+   : functionCallExpression                   #expressionFunctionCall
+   |  expression op=TIMES  expression         #expressionMul
    |  expression op=DIV  expression           #expressionDiv
    |  expression op=PLUS expression           #expressionAdd
    |  expression op=MINUS expression          #expressionSub
@@ -43,6 +49,10 @@ expression
    |  expression op=EQ_EQ expression          #expressionEquals
    |  atom                                    #expressionNumber
    ;
+
+functionCallExpression: ID LPAREN (functionArguments)* (COMMA functionArguments)* RPAREN;
+
+functionArguments: expression;
 
 atom
     : op=INT                                #atomInt
@@ -69,6 +79,7 @@ COLON: ':';
 GT: '>';
 LT: '<';
 MOD: '%';
+COMMA: ',';
 
 INT: DIGIT+;
 DECIMAL: INT '.' INT;
